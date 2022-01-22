@@ -79,5 +79,11 @@ app.delete("/users/:id", (req, res) => {
     }
 })
 
+app.get("/deneme", (req, res) => {
+    res.status(200).send(
+        { message: "hello kitty"}
+    )
+})
+
 // Listen
 app.listen(listenedPort, () => console.log(`Server is listening at ${listenedPort} Port`))
