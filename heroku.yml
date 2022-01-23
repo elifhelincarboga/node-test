@@ -1,3 +1,4 @@
 build:
   docker:
-    web: api/Dockerfile
+    web_api: api/Dockerfile
+    web_reporter: reporter/Dockerfile
