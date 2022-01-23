@@ -2,9 +2,9 @@
 
 // Modules
 const express = require('express');
-const db = require('./db/index');
+const db = require('./api/db/index');
 require('dotenv/config');
-const measureRoutes = require('./routes/measures');
+const measureRoutes = require('./api/routes/measures');
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const morgan = require('morgan');
