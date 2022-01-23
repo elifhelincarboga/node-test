@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "build:jslib": "cd reporter && npm install && npm run build && cd .."
+    "build:jslib": "cd.. cd reporter && npm install && npm run build && cd .. cd api"
   },
   "repository": {
     "type": "git",
