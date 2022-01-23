@@ -1,7 +1,6 @@
 FROM node:11
-WORKDIR /home/node/app
-COPY . /home/node/app
+WORKDIR /home/node/app/api
+COPY . /home/node/app/api
 RUN npm install
 CMD npm run start
-CMD npm run build:jslib
 EXPOSE 3000
