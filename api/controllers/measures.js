@@ -1,24 +1,18 @@
 const mongoose = require("mongoose");
-const Measure = require('../models/measure')
+const Measure = require('../models/measure');
+const datesHelper = require('../methods/helper');
 
-exports.getAllMeasure = async (req, res, next) => {
+exports.getMeasures = async (req, res, next) => {
+    const dates =  datesHelper.getDates(req.query.startDate, req.query.endDate)
     try {
-        const measures = await Measure.find();
+        const measures = await Measure.find({ 
+            navigation_started_at: { 
+                $gte: dates.startDate, 
+                $lte: dates.endDate 
+            } 
+        }).sort({ navigation_started_at: 1 });
         res.status(200).json({
-            measures: measures
-        });
-    } catch (error) {
-        res.status(500).json({ 
-            error: error 
-        });
-    }
-}
-
-exports.getMeasure = async (req, res, next) => {
-    try {
-        const measure = await Measure.findById(req.params.measureId);
-        res.status(200).json({
-            measure: measure
+            measure: measures
         });
     } catch (error) {
         res.status(500).json({ 
@@ -28,45 +22,28 @@ exports.getMeasure = async (req, res, next) => {
 }
 
 exports.createMeasure = async (req, res, next) => {
+    let data = req.body
+
+    if (!data.url && !data.date) {
+        return res.status(400).json({
+            message: "URL or date is missing!",
+        })
+    }
+
     const measure = new Measure({
-        title: req.body.title,
-        description: req.body.description
-    });
+        url: data.url,
+        ttfb: data.ttfb,
+        fcp: data.fcp,
+        domLoad: data.domLoad,
+        windowLoad: data.windowLoad,
+        date: data.date,
+    })
 
     try {
         const savedMeasure = await measure.save();
         res.status(200).json({
             message: "New measure created",
             measure: savedMeasure
-        });
-    } catch (error) {
-        res.status(500).json({ 
-            error: error 
-        });
-    }
-}
-
-exports.deleteMeasure = async (req, res, next) => {
-    try {
-        const removedMeasure = await Measure.remove({_id: req.params.measureId});
-        res.status(200).json({
-            measure: removedMeasure
-        });
-    } catch (error) {
-        res.status(500).json({ 
-            error: error 
-        });
-    }
-}
-
-exports.updateMeasure = async (req, res, next) => {
-    try {
-        const updatedPost = await Measure.updateOne(
-            {_id: req.params.measureId},
-            {$set: {title: req.body.title}}
-        );
-        res.status(200).json({
-            measure: updatedPost
         });
     } catch (error) {
         res.status(500).json({ 

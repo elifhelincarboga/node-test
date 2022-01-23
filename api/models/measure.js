@@ -1,13 +1,21 @@
 const mongoose = require("mongoose");
 
 const measureSchema = mongoose.Schema({
-    title: {
+    siteUrl: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: true
+    ttfb: {
+        type: Number
+    },
+    fcp: {
+        type: Number
+    },
+    domLoad: {
+        type: Number
+    },
+    windowLoad: {
+        type: Number
     },
     date: {
         type: Date,
