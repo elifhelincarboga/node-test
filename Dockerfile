@@ -5,7 +5,7 @@ WORKDIR /home/node/app
 COPY package.json /home/node/app
 RUN npm install
 
-COPY . /app
+COPY . /home/node/app
 RUN npm run build
 
 EXPOSE 3000
