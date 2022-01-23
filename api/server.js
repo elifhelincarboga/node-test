@@ -1,28 +1,42 @@
 
 
-//#region Modules
+// Modules
 const express = require('express');
 const db = require('./db/index');
 require('dotenv/config');
 const measureRoutes = require('./routes/measures');
 const bodyParser = require("body-parser");
-//#endregion
+const cors = require('cors');
+const morgan = require('morgan');
+const compression = require('compression');
 
 const app = express();
 
-//#region Configuration
+// Configuration
 const port = process.env.PORT || 3000;
-//#endregion
+const compressionConfig = {
+    level: 6,
+    threshold: 100 * 1000,
+    filter: (req, res) => {
+        if (req.headers['x-no-compression']) {
+            return false
+        }
+        return compression.filter(req, res)
+    }
+}
 
-//#region Routes
+// Middlewares
+app.use(compression(compressionConfig));
+app.use(morgan('dev'));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( { extended: true } ))
-app.use('/measures', measureRoutes)
-//#endregion
 
-//#region DB Connection
+// Routes
+app.use('/measures', measureRoutes)
+
+// DB Connection
 db.initialize();
-//#endregion
 
 // Listen
 app.listen(port, () => console.log(`Server is listening at ${port} Port`))
