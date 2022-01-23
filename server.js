@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const morgan = require('morgan');
 const compression = require('compression');
+const path = require('path')
 
 const app = express();
 
@@ -34,6 +35,10 @@ app.use(bodyParser.urlencoded( { extended: true } ))
 
 // Routes
 app.use('/measures', measureRoutes)
+
+app.get('/reporter', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
+});
 
 // DB Connection
 db.initialize();
