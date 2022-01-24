@@ -1,5 +1,5 @@
 const api = 'http://node-test-docker.herokuapp.com/measures'
-const hostUrl = window.location.href
+const siteUrl = window.location.href
 const performanceTiming = window.performance.toJSON().timing
 const currentTime = new Date().valueOf()
 var fcp, ttfb, windowLoad, domLoad
@@ -41,7 +41,7 @@ const getPerformanceTiming = () => {
 const sendRequest = () => {
     const request = setInterval(() => {
         let data = {
-            "url": hostUrl,
+            "siteUrl": siteUrl,
             "date": performance.timeOrigin,
             "ttfb": ttfb, // Time to first byte
             "fcp": fcp, // First contentful paint
