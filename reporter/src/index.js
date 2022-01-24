@@ -41,7 +41,7 @@ const getPerformanceTiming = () => {
 const sendRequest = () => {
     const request = setInterval(() => {
         let data = {
-            "url": url,
+            "url": hostUrl,
             "date": performance.timeOrigin,
             "ttfb": ttfb, // Time to first byte
             "fcp": fcp, // First contentful paint
