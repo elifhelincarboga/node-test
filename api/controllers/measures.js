@@ -24,14 +24,14 @@ exports.getMeasures = async (req, res, next) => {
 exports.createMeasure = async (req, res, next) => {
     let data = req.body
 
-    if (!data.url && !data.date) {
+    if (!data.siteUrl && !data.date) {
         return res.status(400).json({
             message: "URL or date is missing!",
         })
     }
 
     const measure = new Measure({
-        url: data.url,
+        siteUrl: data.siteUrl,
         ttfb: data.ttfb,
         fcp: data.fcp,
         domLoad: data.domLoad,
