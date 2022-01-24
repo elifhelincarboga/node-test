@@ -13,15 +13,30 @@ const convertMsToSecond = (ms) => {
     return (ms / 1000)
 }
 
+const getWindowLoad = (performanceTiming) => {
+    return convertMsToSecond(currentTime - performanceTiming.navigationStart)
+}
+
+const getTtfb = (performanceTiming) => {
+    return convertMsToSecond(performanceTiming.responseStart - performanceTiming.navigationStart)
+}
+
+const getDomLoad = (performanceTiming) => {
+    return convertMsToSecond(performanceTiming.domContentLoadedEventEnd - performanceTiming.navigationStart)
+}
+
+const getFcp = (entryList) => {
+    return convertMsToSecond(entryList.getEntriesByName('first-contentful-paint')[0].startTime)
+}
 
 const startObserver = () => {
     if (!isPerformanceObserverSupported) {
-        console.error("PerfanalyticsJS Error : PerformanceObserver NOT supported!")
+        console.error("reporter error; PerformanceObserver NOT supported!")
         return
     }
 
     let observer = new PerformanceObserver((entryList) => {
-        fcp = convertMsToSecond(entryList.getEntriesByName('first-contentful-paint')[0].startTime)
+        fcp = getFcp(entryList)
     })
 
     observer.observe({type: 'paint', buffered: true})
@@ -29,13 +44,13 @@ const startObserver = () => {
 
 const getPerformanceTiming = () => {
     if (!performanceTiming) {
-        console.error("PerfanalyticsJS Error : Performance NOT supported!")
+        console.error("reporter error; Performance NOT supported!")
         return
     }
 
-    ttfb = convertMsToSecond(performanceTiming.responseStart - performanceTiming.navigationStart)
-    domLoad = convertMsToSecond(performanceTiming.domContentLoadedEventEnd - performanceTiming.navigationStart)
-    windowLoad = convertMsToSecond(currentTime - performanceTiming.navigationStart)
+    ttfb = getTtfb(performanceTiming)
+    domLoad = getDomLoad(performanceTiming)
+    windowLoad = getWindowLoad(performanceTiming)
 }
 
 const sendRequest = () => {
