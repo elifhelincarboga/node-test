@@ -41,7 +41,11 @@ app.use('/sites', siteRoutes)
 app.use('/dashboard', serveStatic(path.join(__dirname, 'dashboard/dist')) )
 
 app.get('/reporter', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
+    res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
+});
+
+app.get('/test-app', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './test-app', 'index.html'));
 });
 
 // DB Connection
