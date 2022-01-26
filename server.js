@@ -5,6 +5,7 @@ const express = require('express');
 const db = require('./api/db/index');
 require('dotenv/config');
 const measureRoutes = require('./api/routes/measures');
+const siteRoutes = require('./api/routes/sites');
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const morgan = require('morgan');
@@ -35,9 +36,17 @@ app.use(bodyParser.urlencoded( { extended: true } ))
 
 // Routes
 app.use('/measures', measureRoutes)
+app.use('/sites', siteRoutes)
 
 app.get('/reporter', (req, res) => {
     res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
+});
+
+app.use(express.static(path.join(__dirname, './dashboard/build')));
+['/dashboard', '/dashboard/*'].forEach(p => {
+  app.get(p, (req, res) => {
+    res.sendFile(path.resolve(__dirname, './dashboard', 'build', 'index.html'));
+  });
 });
 
 // DB Connection

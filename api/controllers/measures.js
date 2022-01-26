@@ -1,15 +1,17 @@
 const mongoose = require("mongoose");
 const Measure = require('../models/measure');
+const Site = require('../models/site');
 const datesHelper = require('../methods/helper');
 
 exports.getMeasures = async (req, res, next) => {
     const dates =  datesHelper.getDates(req.query.startDate, req.query.endDate)
     try {
         const measures = await Measure.find({ 
-            navigation_started_at: { 
+            date: { 
                 $gte: dates.startDate, 
                 $lte: dates.endDate 
-            } 
+            },
+            id: req.query.id.toObjectId()
         }).sort({ navigation_started_at: 1 });
         res.status(200).json({
             measure: measures
@@ -40,6 +42,18 @@ exports.createMeasure = async (req, res, next) => {
     })
 
     try {
+        const site = await Site.find({
+            site: { $eq: data.siteUrl }
+        })
+
+        if (site.length === 0) {
+            console.l
+            const site = new Site({
+                url: data.siteUrl,
+            })
+            const savedSite = await site.save();
+        }
+
         const savedMeasure = await measure.save();
         res.status(200).json({
             message: "New measure created",

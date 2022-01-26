@@ -1,0 +1,96 @@
+$bs-xsmall: 576px;
+$bs-small: 768px;
+$bs-medium: 992px;
+$bs-large: 1200px;
+$break-1260px: 1260px;
+$break-large: 1024px;
+$break-xl: 1380px;
+$break-xxl: 1680px;
+
+@mixin media-query($media) {
+  @if $media == xs {
+    @media only screen and (max-width: $bs-xsmall) {
+      @content;
+    }
+  } @else if $media == from-xs {
+    @media only screen and (min-width: $bs-xsmall) {
+      @content;
+    }
+  } @else if $media == sm {
+    @media only screen and (min-width: $bs-xsmall) and (max-width: $bs-small) {
+      @content;
+    }
+  } @else if $media == to-sm {
+    @media only screen and (max-width: $bs-small) {
+      @content;
+    }
+  } @else if $media == from-sm {
+    @media only screen and (min-width: $bs-small) {
+      @content;
+    }
+  } @else if $media == md {
+    @media only screen and (min-width: $bs-small) and (max-width: $bs-medium) {
+      @content;
+    }
+  } @else if $media == to-md {
+    @media only screen and (max-width: $bs-medium) {
+      @content;
+    }
+  } @else if $media == from-md {
+    @media only screen and (min-width: $bs-medium) {
+      @content;
+    }
+  } @else if $media == lg {
+    @media only screen and (min-width: $bs-medium) and (max-width: $bs-large) {
+      @content;
+    }
+  } @else if $media == to-lg {
+    @media only screen and (max-width: $bs-large) {
+      @content;
+    }
+  } @else if $media == from-lg {
+    @media only screen and (min-width: $bs-large) {
+      @content;
+    }
+  } @else if $media == xl {
+    @media only screen and (min-width: $bs-large) {
+      @content;
+    }
+  } @else if $media == to-xl {
+    @media only screen and (max-width: $bs-large) {
+      @content;
+    }
+  } @else if $media == handhelds {
+    @media only screen and (max-width: $bs-small) {
+      @content;
+    }
+  } @else if $media == medium-screens {
+    @media only screen and (min-width: $bs-small) and (max-width: $break-large) {
+      @content;
+    }
+  } @else if $media == medium-large-screens {
+    @media only screen and (min-width: $bs-small) and (max-width: $break-large) {
+      @content;
+    }
+  } @else if $media == wide-screens {
+    @media only screen and (min-width: $break-large) {
+      @content;
+    }
+  } @else if $media == medium-screen1260 {
+    @media only screen and (min-width: $break-large) and (max-width: $break-1260px) {
+      @content;
+    }
+  } @else if $media == break-xl {
+    @media only screen and  (min-width: $break-xl) and (max-width: $break-xxl){
+      @content;
+    }
+  } @else if $media == medium-xl {
+    @media only screen and (min-width: $break-large) and (max-width: $break-xl) {
+      @content;
+    }
+  } @else if $media == height-screen {
+    @media only screen and (max-height:$bs-small) {
+      @content
+    }
+  } 
+}
