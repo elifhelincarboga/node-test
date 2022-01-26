@@ -1,4 +1,4 @@
-const api = 'http://node-test-docker.herokuapp.com/measures'
+const api = 'https://node-test-docker.herokuapp.com/measures'
 const siteUrl = window.location.href
 const performanceTiming = window.performance.toJSON().timing
 const currentTime = new Date().valueOf()

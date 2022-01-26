@@ -1,6 +1,6 @@
 /* eslint-disable eol-last */
 const SERVER_URL = process.env.NODE_ENV === 'production'
-  ? 'http://node-test-docker.herokuapp.com/'
+  ? 'https://node-test-docker.herokuapp.com/'
   : 'http://localhost:3000/'
 
 // const SERVER_URL = 'http://node-test-docker.herokuapp.com/'
