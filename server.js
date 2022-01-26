@@ -45,7 +45,7 @@ app.get('/reporter', (req, res) => {
 app.use(express.static(path.join(__dirname, './dashboard/build')));
 ['/dashboard', '/dashboard/*'].forEach(p => {
   app.get(p, (req, res) => {
-    res.sendFile(path.resolve(__dirname, './dashboard', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, './dashboard', 'dist', 'index.html'));
   });
 });
 
