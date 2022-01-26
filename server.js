@@ -39,15 +39,12 @@ app.use('/measures', measureRoutes)
 app.use('/sites', siteRoutes)
 
 app.get('/reporter', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
+  res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
 });
 
-app.use(express.static(path.join(__dirname, './dashboard/build')));
-['/dashboard', '/dashboard/*'].forEach(p => {
-  app.get(p, (req, res) => {
-    res.sendFile(path.resolve(__dirname, './dashboard', 'dist', 'index.html'));
-  });
-});
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './dashboard', 'dist/index.html'));
+})
 
 // DB Connection
 db.initialize();
