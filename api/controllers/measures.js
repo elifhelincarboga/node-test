@@ -43,11 +43,9 @@ exports.createMeasure = async (req, res, next) => {
 
     try {
         const site = await Site.find({
-            site: { $eq: data.siteUrl }
+            url: { $eq: data.siteUrl }
         })
-
         if (site.length === 0) {
-            console.l
             const site = new Site({
                 url: data.siteUrl,
             })
