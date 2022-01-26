@@ -6,13 +6,17 @@ const datesHelper = require('../methods/helper');
 exports.getMeasures = async (req, res, next) => {
     const dates =  datesHelper.getDates(req.query.startDate, req.query.endDate)
     try {
+
+        const site = await Site.findOne({
+            _id: req.query.id.toObjectId()
+        })
         const measures = await Measure.find({ 
             date: { 
                 $gte: dates.startDate, 
                 $lte: dates.endDate 
             },
-            id: req.query.id.toObjectId()
-        }).sort({ navigation_started_at: 1 });
+            siteUrl: site.url
+        }).sort({ date: 1 });
         res.status(200).json({
             measure: measures
         });

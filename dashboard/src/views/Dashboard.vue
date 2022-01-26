@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <dashboard-box :title="'Dashboard'">
+    <dashboard-box :title="title">
       <div class="row">
         <div class="col-sm-6 col">
           <line-chart
             id="ttfbChart"
-            :height="200"
+            :height="250"
             :chartdata="data.ttfb"
             :options="chartOptions"
           />
@@ -13,7 +13,7 @@
         <div class="col-sm-6 col">
           <line-chart
             id="fcpChart"
-            :height="200"
+            :height="250"
             :chartdata="data.fcp"
             :options="chartOptions"
           />
@@ -21,7 +21,7 @@
         <div class="col-sm-6 col">
           <line-chart
             id="domLoadChart"
-            :height="200"
+            :height="250"
             :chartdata="data.domLoad"
             :options="chartOptions"
           />
@@ -29,7 +29,7 @@
         <div class="col-sm-6 col">
           <line-chart
             id="winLoadChart"
-            :height="200"
+            :height="250"
             :chartdata="data.windowLoad"
             :options="chartOptions"
           />
@@ -52,7 +52,7 @@ export default {
   },
   setup (props, context) {
     const state = reactive({
-      title: 'Hello',
+      title: 'Performance Analytics Dashboard',
       globalParam: computed(() => context.root.$store.state.globalParams),
       filterParam: {
         startTime: new Date(Date.now() - 30 * 60 * 1000),

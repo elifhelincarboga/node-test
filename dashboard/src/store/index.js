@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Api from '../methods/helper'
+import chart from '../methods/chart'
+import Api from '../methods/api'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_MEASURE_DATA (state, data) {
-      state.measures = Api.modifyChartData(data, state.colorList)
+      state.measures = chart.modifyChartData(data, state.colorList)
     },
     SET_WEBSITES_DATA (state, data) {
       state.websites = data?.map((element) => {
