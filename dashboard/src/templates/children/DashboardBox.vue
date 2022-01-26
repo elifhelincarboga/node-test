@@ -31,19 +31,11 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../../assets/css/main.scss';
   .dashboard-box {
     display:flex;
     flex-direction: column;
     .subpage-items {
       position: relative;
-      @include media-query(to-sm) {
-        float: left !important;
-      }
-      @include media-query(handhelds) {
-        display: inline-block;
-        padding: 10px 10px 10px 10px;
-      }
       :after {
         clear: both
       }
@@ -62,16 +54,6 @@ export default {
           font-size: 14px;
           margin:0px;
           margin-left:2px;
-          @include media-query(to-sm) {
-            white-space:normal;
-          }
-        }
-        @include media-query(handhelds) {
-          padding: 0 !important;
-          .dashboardTitle {
-            font-size:25px !important;
-            padding: 0 !important;
-          }
         }
       }
     }
