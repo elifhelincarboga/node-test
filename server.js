@@ -11,6 +11,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const compression = require('compression');
 const path = require('path')
+const serveStatic = require('serve-static')
 
 const app = express();
 
@@ -37,14 +38,11 @@ app.use(bodyParser.urlencoded( { extended: true } ))
 // Routes
 app.use('/measures', measureRoutes)
 app.use('/sites', siteRoutes)
+app.use('/dashboard', serveStatic(path.join(__dirname, 'dashboard/dist')) )
 
 app.get('/reporter', (req, res) => {
   res.sendFile(path.resolve(__dirname, './reporter', 'dist/bundle.js'));
 });
-
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './dashboard', 'dist/index.html'));
-})
 
 // DB Connection
 db.initialize();
